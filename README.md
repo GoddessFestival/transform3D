@@ -15,6 +15,7 @@
  /* backface-visibility: visible|hidden; */
  
 html结构：
+<pre>
     <div id="wrap">
         <div class="box">
             <div>1</div>
@@ -25,6 +26,7 @@ html结构：
             <div>6</div>
         </div>
     </div>
+</pre>
  样式：
  <style>
         @keyframes rotate {
