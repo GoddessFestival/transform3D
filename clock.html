@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字时钟</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul,
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        .time {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            border: 1px solid blanchedalmond;
+            border-radius: 50%;
+        }
+
+        /* 表盘 */
+        .clock {
+            position: relative;
+            height: 200px;
+            width: 200px;
+        }
+
+        .clock>li {
+            position: absolute;
+            height: 5px;
+            width: 2px;
+            left: 98px;
+            top: 0px;
+            background-color: gray;
+            transform-origin: center 100px;
+        }
+
+        .clock>li:nth-of-type(5n+1) {
+            height: 8px;
+            width: 2px;
+            background-color: black;
+        }
+
+        /* 表针 */
+        .icon {
+            position: absolute;
+            top: 95px;
+            left: 95px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: darkblue;
+        }
+
+        .hour {
+            position: absolute;
+            top: 60px;
+            left: 98px;
+            width: 4px;
+            height: 40px;
+            background-color: chartreuse;
+            opacity: 0.8;
+            transform-origin: bottom;
+        }
+
+        .minutes {
+            position: absolute;
+            top: 50px;
+            left: 98px;
+            width: 3px;
+            height: 50px;
+            opacity: 0.8;
+            background-color: cadetblue;
+            transform-origin: bottom;
+        }
+
+        .second {
+            position: absolute;
+            top: 40px;
+            left: 98px;
+            width: 2px;
+            height: 60px;
+            background-color: burlywood;
+            transform-origin: bottom;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="time">
+        <!-- 表盘 -->
+        <ul class="clock">
+            <!-- <li style="transform: rotate(0deg);"></li>
+            <li style="transform: rotate(6deg);"></li>
+            <li style="transform: rotate(12deg);"></li>
+            <li style="transform: rotate(18deg);"></li>
+            <li style="transform: rotate(24deg);"></li> -->
+        </ul>
+        <!-- 指针 -->
+        <div class="hour"></div>
+        <div class="minutes"></div>
+        <div class="second"></div>
+        <div class="icon"></div>
+
+
+
+
+
+    </div>
+    <script type="text/javascript">
+        (function () {
+            // 初始化表盘
+            var clock = document.querySelector(".clock");
+            var len = 60;
+            var deg = 360 / len;
+            var inner = "";
+            for (var i = 0; i < len; i++) {
+                inner += "<li style='transform:rotate(" + deg * i + "deg)'></li>";
+            }
+            clock.innerHTML = inner;
+        })();
+        (function () {
+            // 初始化时间
+            toTimer();
+            setInterval(() => {
+                toTimer();
+            }, 1000);
+
+            function toTimer() {
+                // 设置时分秒
+                var hour = document.querySelector('.hour');
+                var minutes = document.querySelector('.minutes');
+                var second = document.querySelector('.second');
+                var d = new Date();
+
+                // 分 秒 走一次 6deg
+                // 时 走一次 30deg
+                var tSeconds = d.getSeconds();
+                var tMinutes = d.getMinutes() + Math.floor(tSeconds / 60);
+                var tHours = d.getHours() + Math.floor(tMinutes / 60);
+                second.style.transform = "rotate(" + tSeconds * 6 + "deg)";
+                minutes.style.transform = "rotate(" + tMinutes * 6 + "deg)";
+                hour.style.transform = "rotate(" + tHours * 30 + "deg)";
+
+            }
+
+
+
+        })();
+
+
+
+    </script>
+</body>
+
+</html>
